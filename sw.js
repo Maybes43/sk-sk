@@ -1,5 +1,5 @@
 /* Offline cache. The version changes automatically with every build. */
-const CACHE = "zosit-8e5c980b77";
+const CACHE = "zosit-4708f96c38";
 const CORE = ["./", "index.html", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));

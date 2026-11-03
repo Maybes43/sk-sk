@@ -170,8 +170,8 @@ table{border-collapse:collapse;width:100%}
 .src button[aria-pressed="true"] b{color:var(--accent)}
 .batch{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);border:1px solid var(--rule);background:var(--sheet);border-radius:8px;padding:2px 4px 2px 10px}
 .batch select{font:600 13px var(--f-num);border:0;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:4px 6px;cursor:pointer}
-.say{display:none;align-items:center;justify-content:center;flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);background:var(--sheet);color:var(--accent);cursor:pointer;padding:0;vertical-align:middle}
-.tts-on .say{display:inline-flex}
+.say{display:inline-flex;align-items:center;justify-content:center;flex:none;width:34px;height:34px;border-radius:50%;border:1px solid var(--rule);background:var(--sheet);color:var(--accent);cursor:pointer;padding:0;vertical-align:middle}
+html:not(.tts-on) .say{opacity:.5}
 .say:hover{background:var(--accent-soft)}
 .say.big{width:44px;height:44px}.say.big svg{width:22px;height:22px}
 .say.sm{width:26px;height:26px;border-color:transparent;background:none;margin-right:4px}.say.sm svg{width:15px;height:15px}
@@ -557,7 +557,7 @@ chytrý|умный, сообразительный|ff||Не «хитрый»: х
 úrok|процент (по кредиту)|ff|m|Не «урок»: урок = hodina
 zákusok|пирожное, десерт|ff|m|Не «закуска»: закуска = predjedlo
 jahoda|клубника|ff|ž|Не «ягода»: ягода = bobuľa
-hodina|час; урок|ff|ž|Не «година» и не «час» в смысле времени вообще
+hodina|час; урок|ff|ž|Час (60 минут) и урок. А «время» — это čas
 čas|время|ff|m|Не «час»: час = hodina
 list|письмо; лист|ff|m
 `;
@@ -980,6 +980,41 @@ Chcel som povedať|Я хотел сказать
 drzý|дерзкий, наглый
 ahojte|привет (группе или на «вы»)
 Ďakujem pekne|Большое спасибо||Наречие на -ne звучит мягко [ňe]
+# l11
+korenie|специи, приправы|s
+čierne korenie|чёрный перец|s
+hrniec|кастрюля|m
+misa|миска; салатница|ž
+šálka|чашка|ž
+kanvica|чайник|ž
+príbor|столовые приборы|m
+lyžica|ложка|ž
+vidlička|вилка|ž
+nôž|нож|m
+kuchynská linka|кухонный гарнитур|ž
+stôl|стол|m
+stolička|стул|ž
+rúra|духовка|ž
+sporák|кухонная плита|m
+chladnička|холодильник|ž
+mikrovlnka|микроволновка|ž
+drez|кухонная мойка|m
+mixér|миксер; блендер|m
+komoda|комод|ž
+socha|статуя, скульптура|ž|«Памятник» — pamätník
+sprcha|душ|ž
+sprchovať sa|принимать душ
+Podľa mňa…|По-моему… / На мой взгляд…
+priať|желать||prajem, praješ, praje… Prajem ti pekný deň.
+Prajem ti pekný deň.|Желаю тебе хорошего дня.
+Nie je…|Не является… / Нет…||С byť «nie» пишется отдельно: nie je, nie som
+Toto má byť…|Это должно быть… (так задумано)
+Toto musí byť…|Это обязательно должно быть…
+Tieto veci by mali byť…|Эти вещи должны бы быть…||Условное наклонение: by + прошедшее время
+V kuchyni by tieto veci nemali byť.|На кухне этих вещей быть не должно.
+ideálny|идеальный
+Môj ideálny deň v meste|Мой идеальный день в городе
+Ráno idem do… Potom idem do…|Утром я иду в… Потом я иду в…
 `;
 
 /* verb line: infinitive | ru | present ja,ty,on,my,vy,oni | past m | past f | aspect (pf) | core(1)
@@ -1070,12 +1105,14 @@ pustiť|включить (музыку); выпустить|pustím,pustíš,pus
 zoznámiť sa|познакомиться|zoznámim,zoznámiš,zoznámi,zoznámime,zoznámite,zoznámia|||pf|
 urobiť|сделать|urobím,urobíš,urobí,urobíme,urobíte,urobia|||pf|
 stretnúť sa|встретиться|stretnem,stretneš,stretne,stretneme,stretnete,stretnú|stretol|stretla|pf|
+priať|желать|prajem,praješ,praje,prajeme,prajete,prajú||||
+sprchovať sa|принимать душ|sprchujem,sprchuješ,sprchuje,sprchujeme,sprchujete,sprchujú||||
 `;
 /* verbs that appear in the lesson notes */
 const LESSON_VERBS = new Set(("mať,volať sa,čítať,učiť sa,žiť,bývať,ísť,vedieť,poznať,vidieť,hľadať,čakať,robiť,hovoriť,pracovať,rozumieť,"+
  "variť,jesť,piť,zabudnúť,začať,prísť,cestovať,pýtať sa,byť,mať sa,študovať,prechádzať sa,pozerať sa,rozprávať,počúvať,riešiť,snažiť sa,"+
  "pripravovať,vstávať,umývať sa,obliekať sa,raňajkovať,obedovať,večerať,cvičiť,upratovať,nakupovať,oddychovať,chodiť,hrať,spievať,"+
- "telefonovať,diskutovať,plánovať,zvyknúť,cítiť sa,klamať,tešiť sa,stretávať sa,chýbať,prenajímať,pustiť,zoznámiť sa,urobiť,stretnúť sa,písať").split(","));
+ "priať,sprchovať sa,telefonovať,diskutovať,plánovať,zvyknúť,cítiť sa,klamať,tešiť sa,stretávať sa,chýbať,prenajímať,pustiť,zoznámiť sa,urobiť,stretnúť sa,písať").split(","));
 
 /* ============ INTERFACE LANGUAGE ============
    Interface strings only; word translations stay Russian. Format: key: [ru, uk, en]. {x} = placeholder. */
@@ -1142,7 +1179,7 @@ const I18N_RAW = {
   typeHint:["Напишите по-словацки. Диакритику можно пропустить — засчитаю и покажу, где она нужна.","Напишіть словацькою. Діакритику можна пропустити — зарахую і покажу, де вона потрібна.","Type it in Slovak. Diacritics are optional — it still counts, and you'll see where they go."],
   ansLabel:["Ответ по-словацки","Відповідь словацькою","Answer in Slovak"], check:["Проверить","Перевірити","Check"],
   flipHint:["Вспомните перевод, потом откройте.","Пригадайте переклад, потім відкрийте.","Recall the translation, then reveal it."], show:["Показать","Показати","Show"],
-  ok:["Верно","Правильно","Correct"], near:["Верно, но с диакритикой так:","Правильно, але з діакритикою так:","Correct — with diacritics it's:"], bad:["Не совсем","Не зовсім","Not quite"], badVerb:["Правильно:","Правильно:","Correct form:"],
+  ok:["Верно","Правильно","Correct"], altOk:["Тоже верно ({w}), но здесь загадано:","Теж правильно ({w}), але тут загадано:","Also correct ({w}), but the word here is:"], near:["Верно, но с диакритикой так:","Правильно, але з діакритикою так:","Correct — with diacritics it's:"], bad:["Не совсем","Не зовсім","Not quite"], badVerb:["Правильно:","Правильно:","Correct form:"],
   next:["Дальше","Далі","Next"], typo:["Это опечатка — засчитать","Це описка — зарахувати","It was a typo — count it"],
   hard:["Трудно","Важко","Hard"], good:["Хорошо","Добре","Good"], easy:["Легко","Легко","Easy"], forgot:["Не помню","Не пам'ятаю","Forgot"],
   youWrote:["Вы написали:","Ви написали:","You wrote:"],
@@ -1186,7 +1223,9 @@ const I18N_RAW = {
   langLabel:["Язык интерфейса","Мова інтерфейсу","Interface language"], themeLabel:["Тема оформления","Тема оформлення","Theme"],
   th_auto:["Как в системе","Як у системі","System"], th_light:["Светлая","Світла","Light"], th_gray:["Серая","Сіра","Gray"], th_blue:["Синяя","Синя","Blue"], th_dark:["Тёмная","Темна","Dark"],
   trNote:["","Переклади слів поки що російською.","Word translations are in Russian for now."],
-  say:["Прослушать","Прослухати","Listen"], ttsTitle:["Озвучка","Озвучення","Pronunciation"],
+  say:["Прослушать","Прослухати","Listen"],
+  ttsMissingShort:["Нет словацкого голоса на устройстве","Немає словацького голосу на пристрої","No Slovak voice on this device"],
+  ttsMissing:["На этом устройстве нет словацкого голоса. Как добавить: «Прогресс → Озвучка».","На цьому пристрої немає словацького голосу. Як додати: «Прогрес → Озвучення».","This device has no Slovak voice. How to add one: Progress → Pronunciation."], ttsTitle:["Озвучка","Озвучення","Pronunciation"],
   ttsVoice:["Голос: {v}","Голос: {v}","Voice: {v}"],
   ttsNone:["На этом устройстве не найден словацкий голос, поэтому кнопки прослушивания скрыты. Добавьте словацкий голос в настройках системы и перезагрузите страницу. iPhone/iPad: Настройки → Универсальный доступ → Устный контент → Голоса → Словацкий. Android: Настройки → Синтез речи (Google) → Установить голосовые данные → Slovenčina. Windows: Параметры → Время и язык → Речь → Добавить голоса.","На цьому пристрої не знайдено словацького голосу, тому кнопки прослуховування приховано. Додайте словацький голос у налаштуваннях системи й перезавантажте сторінку. iPhone/iPad: Параметри → Доступність → Усний контент → Голоси → Словацька. Android: Налаштування → Синтез мовлення (Google) → Установити голосові дані → Slovenčina. Windows: Параметри → Час і мова → Мовлення → Додати голоси.","No Slovak voice was found on this device, so the listen buttons are hidden. Add a Slovak voice in your system settings and reload. iPhone/iPad: Settings → Accessibility → Spoken Content → Voices → Slovak. Android: Settings → Text-to-speech (Google) → Install voice data → Slovenčina. Windows: Settings → Time & language → Speech → Add voices."],
   ttsNoApi:["Этот браузер не поддерживает озвучку.","Цей браузер не підтримує озвучення.","This browser doesn't support speech."],
@@ -1194,7 +1233,7 @@ const I18N_RAW = {
   ttsRate:["Скорость","Швидкість","Speed"], rSlow:["медленно","повільно","slow"], rNorm:["обычно","звичайно","normal"], rFast:["быстро","швидко","fast"],
   aboutTitle:["О приложении","Про застосунок","About"],
   aboutBody:["Частоты слов: набор данных wordfreq (Robyn Speer и др.), лицензия CC BY-SA 4.0; слова приведены к словарной форме с помощью simplemma (Adrien Barbaresi). Тематические наборы и переводы составлены для этого приложения; перед заучиванием сомнительные формы стоит сверить по словарю slovnik.juls.savba.sk. Озвучка — встроенный синтез речи вашего устройства.","Частоти слів: набір даних wordfreq (Robyn Speer та ін.), ліцензія CC BY-SA 4.0; слова зведено до словникової форми за допомогою simplemma (Adrien Barbaresi). Тематичні набори й переклади складено для цього застосунку; сумнівні форми варто звірити зі словником slovnik.juls.savba.sk. Озвучення — вбудований синтез мовлення вашого пристрою.","Word frequencies: the wordfreq dataset (Robyn Speer et al.), CC BY-SA 4.0; words were reduced to dictionary forms with simplemma (Adrien Barbaresi). Topic sets and translations were written for this app; check doubtful forms at slovnik.juls.savba.sk. Pronunciation uses your device's built-in speech synthesis."],
-  lessonN:["Урок {n}","Урок {n}","Lesson {n}"], l9:["жильё","житло","housing"], l10:["квартира","квартира","apartment"],
+  lessonN:["Урок {n}","Урок {n}","Lesson {n}"], l9:["жильё","житло","housing"], l10:["квартира","квартира","apartment"], l11:["кухня","кухня","kitchen"],
 };
 const THEME_I18N = {
   time:["Время и погода","Час і погода","Time & weather"], adv:["Наречия","Прислівники","Adverbs"], food:["Еда","Їжа","Food"], city:["Город","Місто","City"],
@@ -1222,11 +1261,11 @@ function t(key, vars){
   return s;
 }
 
-const LESSON_TAGS = {l1:"",l2:"",l3:"",l4:"",l5:"",l6:"",l7:"",l8:"",l9:"",l10:""};
+const LESSON_TAGS = {l1:"",l2:"",l3:"",l4:"",l5:"",l6:"",l7:"",l8:"",l9:"",l10:"",l11:""};
 const THEME_TAGS = {time:"",adv:"",food:"",city:"",home:"",work:"",people:"",adj:"",ff:"",phr:"",mine:""};
 const TAGS = {};
 function fillTagNames(){
-  for(const k in LESSON_TAGS){ const n=+k.slice(1); LESSON_TAGS[k]=t("lessonN",{n})+(k==="l9"||k==="l10"?" · "+t(k):""); }
+  for(const k in LESSON_TAGS){ const n=+k.slice(1); LESSON_TAGS[k]=t("lessonN",{n})+(I18N_RAW[k]?" · "+t(k):""); }
   for(const k in THEME_TAGS) THEME_TAGS[k]=THEME_I18N[k][LANG_I];
   for(const k in CATS) CATS[k]=CATS_I18N[k][LANG_I];
   for(const k in GENDER) GENDER[k]=GENDER_I18N[k][LANG_I];
@@ -1417,7 +1456,7 @@ spolu|spolu|вместе|d|158
 nič|nič|ничего|f|159
 patriť|patriť|принадлежать; относиться к|v|160
 rôzny|rôzny|разный|a|161
-lebo|lebo|потому что (разг.)|f|162
+lebo|lebo|потому что|f|162
 posledný|posledný|последний|a|163
 často|často|часто|t|164
 okrem|okrem|кроме|f|165
@@ -1897,7 +1936,6 @@ región|región|регион|c|663
 čítať|čítať|читать|v|664
 chýbať|chýbať|не хватать; отсутствовать|v|665
 stena|stena|стена|h|666
-niekoľký|niekoľký|несколько|f|669
 hudobný|hudobný|музыкальный|a|670
 potrebný|potrebný|необходимый|a|671
 vlas|vlas|волос|b|672
@@ -2459,7 +2497,7 @@ predávať|predávať|продавать|v|1308
 analýza|analýza|анализ|w|1309
 budúci|budúci|будущий|a|1310
 digitálny|digitálny|цифровой|a|1311
-filmový|filmový|кино-, фильмовой|a|1312
+filmový|filmový|кино- (кинематографический)|a|1312
 riadenie|riadenie|управление|w|1313
 občas|občas|время от времени|t|1315
 snáď|snáď|может быть|f|1317
@@ -2744,7 +2782,7 @@ zasa|zasa|опять|d|1910
 zhruba|zhruba|примерно|d|1911
 umožniť|umožniť|позволить|v|1914
 pokračovanie|pokračovanie|продолжение|x|1915
-kolo|kolo|круг; колесо; велосипед (разг.)|x|1918
+kolo|kolo|круг; раунд; колесо|x|1918
 uzavrieť|uzavrieť|закрыть; заключить|v|1924
 reálny|reálny|реальный|a|1926
 zabrániť|zabrániť|предотвратить|v|1927
@@ -2851,7 +2889,7 @@ netušiť|netušiť|не догадываться|v|2266
 prebehnúť|prebehnúť|пробежать; пройти (о событии)|v|2268
 dočasný|dočasný|временный|a|2270
 silne|silne|сильно|d|2274
-preč|preč|прочь, нет (ушёл)|d|2282
+preč|preč|прочь; нет на месте (Je preč — ушёл, пропал)|d|2282
 uprostred|uprostred|посередине|d|2283
 údajne|údajne|якобы|d|2284
 kresťan|kresťan|христианин|p|2293
@@ -3210,7 +3248,7 @@ maslo|сливочное масло|e|s|3719|maslo
 syr|сыр|e|m|3189|syr
 tvaroh|творог|e|m||
 jogurt|йогурт|e|m|10684|jogurt
-smotana|сливки, сметана|e|ž|8885|smotana
+smotana|сливки|e|ž|8885|smotana
 kyslá smotana|сметана|e|ž||
 mlieko|молоко|e|s|1953|mlieko
 vajce|яйцо|e|s|2880|vajce
@@ -3503,7 +3541,7 @@ stanica|вокзал; станция|c|ž|565|stanica
 nástupište|платформа|c|s|14260|nástupište
 koľaj|путь (ж/д)|c|ž|5948|koľaj
 lístok|билет|c|m|1452|lístok
-cestovný lístok|проездной билет|c|m||
+cestovný lístok|билет (на проезд)|c|m||
 predplatný lístok|проездной (абонемент)|c|m||
 cestovný poriadok|расписание|c|m||
 odchod|отправление|c|m|1627|odchod
@@ -3839,7 +3877,7 @@ vodičák|права (разг.)|c|m|16823|vodičák
 riadiť auto|водить машину|c|||
 volant|руль|c|m|6294|volant
 brzda|тормоз|c|ž|4013|brzda
-plyn (pedál)|газ (педаль)|c|m||
+plynový pedál|педаль газа|c|m||
 spojka|сцепление|c|ž|4538|spojka
 prevodovka|коробка передач|c|ž|3560|prevodovka
 motor|двигатель|c|m|518|motor
@@ -4396,7 +4434,7 @@ susedia|соседи|p|pl|5836|susediť
 domáci|хозяин (квартиры), местные|p|m|1042|domáci
 cudzí človek|незнакомый человек|p|m||
 známa osobnosť|знаменитость|p|ž||
-smartfónová aplikácia|мобильное приложение|y|ž||
+mobilná aplikácia|мобильное приложение|y|ž||
 nastavenia|настройки|y|pl|5177|nastavenie
 heslo k wifi|пароль от вайфая|y|s||
 pripojenie|подключение|y|s|2729|pripojenie
@@ -4522,7 +4560,7 @@ cedidlo|дуршлаг|h|s||
 naberačka|половник|h|ž||
 varecha|деревянная ложка|h|ž||
 metlička|венчик|h|ž||
-struhadlo|тёрка|h|s||
+strúhadlo|тёрка|h|s||
 plech|противень|h|m|5809|plech
 forma na pečenie|форма для выпечки|h|ž||
 termoska|термос|h|ž||
@@ -4856,7 +4894,7 @@ Som doma.|Я дома.|k|||
 Som v práci.|Я на работе.|k|||
 Nemám šajnu.|Без понятия. (разг.)|k|||
 Je to jedno.|Всё равно.|k|||
-Záleží na tom.|Зависит от этого.|k|||
+Záleží na tom.|Это важно. / От этого зависит.|k|||
 Uvidíme.|Посмотрим.|k|||
 Neboj sa.|Не бойся. / Не волнуйся.|k|||
 Nič sa nedeje.|Ничего не случилось. / Всё нормально.|k|||
@@ -5133,7 +5171,7 @@ behať|бегать|g||3638|behať
 bicyklovať sa|кататься на велосипеде|g|||
 korčuľovať sa|кататься на коньках|g|||
 lyžovanie|лыжи (спорт)|g|s|5084|lyžovanie
-snoubord|сноуборд|g|m||
+snowboard|сноуборд|g|m||
 joga|йога|g|ž|7410|joga
 fitnes|фитнес|g|m|13546|fitnes
 tréning|тренировка|g|m|2651|tréning
@@ -5189,7 +5227,7 @@ tablet|планшет|y|m|11135|tablet
 obrazovka|экран|y|ž|3092|obrazovka
 klávesnica|клавиатура|y|ž|6288|klávesnica
 internet|интернет|y|m|1294|internet
-wifi|вайфай|y|s|11884|wifi
+wifi|вайфай|y||11884|wifi
 aplikácia|приложение|y|ž|1188|aplikácia
 stiahnuť|скачать|y||1787|stiahnuť
 nainštalovať|установить|y||10206|nainštalovať
@@ -5980,7 +6018,6 @@ vŕtať|сверлить|h||13169|vŕtať
 zmontovať|собрать (мебель)|h|||
 rozobrať|разобрать|h||11648|rozobrať
 vymeniť žiarovku|поменять лампочку|h|||
-nábytok z IKEA|мебель из ИКЕА|h|||
 kúpeľňová skrinka|шкафчик в ванной|h|ž||
 sprchovací kút|душевая кабина|h|m||
 záchodová misa|унитаз|h|ž||
@@ -6072,7 +6109,7 @@ bistro|бистро|c|s|17796|bistro
 bar|бар|c|m|1549|bar
 klub|клуб|c|m|331|klub
 čerpacia stanica|автозаправка|c|ž||
-umyváreň áut|автомойка|c|ž||
+autoumyváreň|автомойка|c|ž||
 autoservis|автосервис|c|m||
 pneuservis|шиномонтаж|c|m||
 zdravotné stredisko|медицинский центр|c|s||
@@ -6087,7 +6124,6 @@ električková zastávka|трамвайная остановка|c|ž||
 konečná|конечная (остановка)|c|ž|2178|konečná
 spoj|рейс|c|m|2936|spoj
 nočný spoj|ночной рейс|c|m||
-grafikon|расписание (график)|c|m||
 dopravný podnik|транспортное предприятие|c|m||
 revízor|контролёр|c|m||
 čierny pasažier|безбилетник|c|m||
@@ -6099,7 +6135,7 @@ kruhový objazd|круговое движение|c|m||
 cyklotrasa|велодорожка|c|ž|7280|cyklotrasa
 požičať bicykel|взять велосипед напрокат|c|||
 spolujazda|совместная поездка|c|ž||
-Kde vystupujem?|Где мне выходить?|c|||
+Kde mám vystúpiť?|Где мне выходить?|c|||
 Ide tento autobus do centra?|Этот автобус идёт в центр?|c|||
 Koľko zastávok?|Сколько остановок?|c|||
 zdravotný stav|состояние здоровья|b|m||
@@ -6493,6 +6529,14 @@ materská dovolenka|декретный отпуск|w|ž||
     if(FREQ[l]!==undefined) w.lemma=l;
   }
 })();
+/* words whose Russian translation shares a meaning with this one (друг → priateľ / kamarát) */
+let SYN=null;
+function ruParts(ru){ return String(ru).toLowerCase().replace(/\(.*?\)/g,"").split(/[;,]/).map(x=>x.replace(/[.!?…]/g,"").trim()).filter(x=>x.length>1); }
+function synonymsOf(w){
+  if(!SYN){ SYN=new Map(); for(const o of allWords()) for(const r of ruParts(o.ru)){ if(!SYN.has(r)) SYN.set(r,[]); SYN.get(r).push(o); } }
+  const out=new Set(); for(const r of ruParts(w.ru)) for(const o of (SYN.get(r)||[])) if(o!==w && o.sk.toLowerCase()!==w.sk.toLowerCase()) out.add(o);
+  return [...out];
+}
 function inLessons(w){ return w.tags.some(t=>LESSON_TAGS[t]||t==="mine"); }
 function inLibrary(w){ return !!w.cat; }
 const PRES_P = ["ja","ty","on / ona","my","vy","oni"];
@@ -6501,7 +6545,7 @@ const VERBS = VERBS_RAW.trim().split("\n").map(l=>{
   const [inf,ru,pres,pm,pf,asp,core]=l.split("|");
   const m = inf.match(/^(\S+)(?: (sa|si))?$/);
   const base = m[1], refl = m[2]||"";
-  const pastM = pm || base.replace(/ť$/,"l");
+  const pastM = pm || (/ieť$/.test(base) ? base.replace(/ieť$/,"el") : base.replace(/ť$/,"l"));
   const pastF = pf || pastM+"a";
   const pastPl = pastF.slice(0,-1)+"i";
   return {inf, base, refl, ru, pres:pres.split(","), pastM, pastF, pastPl, pf:asp==="pf", core:core==="1"};
@@ -6628,14 +6672,14 @@ const TTS = {
   voice:null, api: typeof window!=="undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance!=="undefined",
   init(){
     if(!this.api){ this.update(); return; }
-    const pick=()=>{ try{
+    const pick=this.pick=()=>{ try{
       const vs=speechSynthesis.getVoices()||[];
       const sk=vs.filter(v=>/^sk([-_]|$)/i.test(v.lang||""));
       this.voice = sk.find(v=>v.localService) || sk[0] || null;
     }catch(e){ this.voice=null; } this.update(); };
     pick();
     try{ speechSynthesis.addEventListener("voiceschanged", pick); }catch(e){ speechSynthesis.onvoiceschanged=pick; }
-    setTimeout(pick, 1200);
+    [300,1200,3000,6000].forEach(ms=>setTimeout(pick, ms));
   },
   get ok(){ return !!this.voice; },
   update(){
@@ -6643,10 +6687,12 @@ const TTS = {
     const info=document.getElementById("ttsInfo"); if(!info) return;
     info.textContent = !this.api ? t("ttsNoApi") : this.ok ? t("ttsVoice",{v:this.voice.name}) : t("ttsNone");
     document.getElementById("ttsCtl").hidden = !this.ok;
+    document.querySelectorAll(".say").forEach(b=>b.title = this.ok ? t("say") : t("ttsMissingShort"));
   },
   clean(text){ return String(text).replace(/…/g,"").replace(/\s*\/\s*/g,", ").trim(); },
   speak(text){
-    if(!this.ok||!text) return;
+    if(!text) return;
+    if(!this.ok){ this.pick&&this.pick(); if(!this.ok){ showToast(!this.api?t("ttsNoApi"):t("ttsMissing")); return; } }
     try{
       speechSynthesis.cancel();
       const u=new SpeechSynthesisUtterance(this.clean(text));
@@ -6737,8 +6783,9 @@ document.addEventListener("click",e=>{
 let toastT;
 function showToast(text, undo){
   const t=$("#toast"); $("#toastText").textContent=text; t.hidden=false;
-  $("#toastUndo").onclick=()=>{ t.hidden=true; undo(); };
-  clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true, 6000);
+  $("#toastUndo").hidden=!undo;
+  $("#toastUndo").onclick=()=>{ t.hidden=true; if(undo) undo(); };
+  clearTimeout(toastT); toastT=setTimeout(()=>t.hidden=true, 7000);
 }
 
 function roundMode(){ return S.settings.set!=="all"; }
@@ -6848,10 +6895,11 @@ function bindGrades(container, primaryIdx){
 function answerTyped(val){
   if(!val.trim()) return;
   phase="graded";
-  const w=current, res=check(val, variants(w.sk));
+  const w=current; let res=check(val, variants(w.sk)), alt=null;
+  if(res.r==="bad"){ for(const o of synonymsOf(w)){ const r2=check(val, variants(o.sk)); if(r2.r!=="bad"){ alt=o; res={r:"ok"}; break; } } }
   const inp=$("#ans"); inp.disabled=true; $("#checkBtn").hidden=true;
   const shown = res.r==="near" ? markDiff(res.a,val) : esc(w.sk);
-  const verdict = {ok:t("ok"),near:t("near"),bad:t("bad")}[res.r];
+  const verdict = alt ? t("altOk",{w:alt.sk}) : {ok:t("ok"),near:t("near"),bad:t("bad")}[res.r];
   const note = w.note ? `<div class="note">${esc(w.note)}</div>` : "";
   let grades, prim;
   if(res.r==="bad"){ grades=[[t("next"),0],[t("typo"),4]]; prim=0; }
@@ -6914,7 +6962,7 @@ function renderVerb(){
   $("#verbMeta").innerHTML = free ? t("vFree") : t("vMeta",{a:`<b>${due}</b>`,b:`<b>${fresh}</b>`});
   const tenseLabel = past ? t("tPast") : (v.pf ? t("tPf") : t("tPres"));
   page.innerHTML = `<div class="eyebrow"><span>${tenseLabel}</span>${v.refl?`<span>${t("refl")}: ${v.refl}</span>`:""}</div>
-    <p class="prompt"><span style="color:var(--accent)">${esc(forms[idx].p)}</span> · <span lang="sk">${esc(v.inf)}</span><small>${esc(v.ru)}${past&&forms[idx].p==="ja"?" · "+t("masc"):""}</small></p>
+    <p class="prompt"><span style="color:var(--accent)">${esc(forms[idx].p)}</span> · <span lang="sk">${esc(v.inf)}</span> ${sayBtn(v.inf,"sm")}<small>${esc(v.ru)}${past&&forms[idx].p==="ja"?" · "+t("masc"):""}</small></p>
     <div class="answer-row"><input id="vans" autocomplete="off" autocapitalize="off" spellcheck="false" lang="sk" aria-label="${t("vAnsLabel")}"><button class="btn primary" id="vcheck" type="button">${t("check")}</button></div>
     <div class="keys" id="vkp"></div>
     <p class="hint" style="margin:0">${past?t("pastHint"):t("presHint")}</p>
@@ -7024,7 +7072,7 @@ $("#addForm").addEventListener("submit",e=>{
   const sk=$("#addSk").value.trim(), ru=$("#addRu").value.trim();
   if(!sk||!ru) return;
   if(allWords().some(w=>exactNorm(w.sk)===exactNorm(sk))){ $("#addMsg").textContent=t("exists",{w:sk}); return; }
-  S.custom.push({id:"c:"+Date.now().toString(36), sk, ru, g:$("#addG").value, note:$("#addNote").value.trim()});
+  S.custom.push({id:"c:"+Date.now().toString(36), sk, ru, g:$("#addG").value, note:$("#addNote").value.trim()}); SYN=null;
   persist(); ["#addSk","#addRu","#addNote"].forEach(s=>$(s).value=""); $("#addG").value="";
   $("#addMsg").textContent=t("added",{w:sk}); $("#addSk").focus();
   renderDict(); renderTags();
